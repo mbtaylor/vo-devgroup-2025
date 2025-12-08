@@ -1,0 +1,148 @@
+\documentclass[20pt,landscape]{foils}
+\usepackage{mbtslides}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{marvosym}
+\usepackage{amssymb}% provides \gtrsim
+\usepackage{ellipse}
+\usepackage{fancyvrb}
+\usepackage{ulem}% provides \sout
+\usepackage[cm]{sfmath}
+
+\newif\ifrubric
+% \rubrictrue
+
+%This is supposed to make underscores cut'n'pastable
+%Not sure what the lmodern package does or whether it's needed for this.
+%But it's not working (though apparently it did in nam2023)
+%\usepackage[T1]{fontenc}
+%\usepackage{lmodern}
+%\usepackage{textcomp}
+%\DeclareTextSymbolDefault{\textunderscore}{T1}
+
+\setlength{\unitlength}{1cm}
+
+
+\newcommand{\bhref}[2]{\href{#1}{{\color{blue}#2}}}
+\newcommand{\burl}[1]{{\color{blue}\url{#1}}}
+
+% Fixes problem with includegraphics images screwing up colours on their
+% page in the output PDF.  I have no idea *how* it fixes it mind.
+\pdfpageattr {/Group << /S /Transparency /I true /CS /DeviceRGB>>}
+  
+% Oh no, this is required on my Ubuntu 22.04 (though not 20.04) installation
+% to make the \ellipse commands work.
+\makeatletter
+\newdimen\@tempdimd
+\makeatother
+
+\begin{document}
+\sf
+\newcommand{\bigword}[1]{
+  \vspace*{7cm}
+  \begin{center}
+    \color{darkblue}
+    \scalebox{3}{
+      \Huge\bf #1
+    }
+  \end{center}
+  \addtocounter{page}{-1}
+}
+
+\ifrubric
+
+\rightfooter{}
+\MyLogo{}
+
+\vspace*{3cm}
+\hspace*{5cm}
+\begin{minipage}{30cm}
+\LARGE
+\begin{enumerate}
+  \item Wins
+  \item Issues
+  \item Intro to the Virtual Observatory
+  \item AOB
+\end{enumerate}
+\end{minipage}
+
+\newpage
+\bigword{Wins?}
+\newpage
+\bigword{Issues?}
+\newpage
+
+\fi
+
+\MyLogo{\color{grey}
+        Mark Taylor, Introduction to the Virtual Observatory,
+        Bristol Astro Dev Group,
+        12 December 2025}
+\rightfooter{\quad{\color{grey}\thepage/\pageref*{lastPage}}}
+\setcounter{page}{1}
+
+\vspace*{1.0cm}
+\begin{center}
+{\color{darkblue}
+\framebox{\Huge\bf
+  \begin{minipage}{0cm}
+  \begin{tabbing}
+  Introduction to the \\
+  Virtual Observatory
+  \end{tabbing}
+  \end{minipage}
+}}
+\\[2.0cm]
+{\Large
+  Mark Taylor
+}
+\\[2.0cm]
+{\large\color{grey}
+  Bristol Astro Dev Group
+  \\[2ex]
+  12 December 2025
+}
+\end{center}
+
+\vspace*{1.5cm}
+\begin{center}
+  \tiny
+  \color{brown}
+  \input gitid
+\end{center}
+
+\slide{Outline}
+
+\begin{list0}
+  \item The Virtual Observatory (VO)
+  \begin{list2big}
+    \item What is it?
+    \item Why should I care?
+    \item How can I use it?
+  \end{list2big}
+\end{list0}
+
+
+\label{lastPage}
+   
+\ifrubric
+
+\newcommand{\aobSlide}[1]{
+\newpage
+\rightfooter{}
+\MyLogo{} 
+\begin{picture}(30,0)
+  #1
+\end{picture} 
+\bigword{\ \ AOB?}
+}
+\aobSlide{}
+\aobSlide{
+  \put(0,-21){\includegraphics[scale=0.85]{cylon2.png}}
+  \put(26,-21){\includegraphics[scale=0.95]{cylon1.png}}
+}
+
+
+\fi
+
+\end{document}
