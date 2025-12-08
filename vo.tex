@@ -115,16 +115,50 @@
   \input gitid
 \end{center}
 
-\slide{Outline}
+\newpage
+
+\vspace*{6cm}
+\begin{center}
+\begin{minipage}{0cm}
+\Huge
+\begin{tabbing}
+What is the Virtual Observatory? \\[2ex]
+And why should I care?
+\end{tabbing}
+\end{minipage}
+\end{center}
+
+\newpage
 
 \begin{list0}
-  \item The Virtual Observatory (VO)
+  \item {\color{darkred}\sl ``All astro archives in your computer''}
+  \item What the VO is NOT:
   \begin{list2big}
-    \item What is it?
-    \item Why should I care?
-    \item How can I use it?
+    \item A massive computer holding all archived datasets
+  \end{list2big}
+  \item What the VO is:
+  \begin{list2big}
+    \item A set of {\color{darkred} interoperable protocols}
+          that clients and services can use to talk to each other
+          {\color{darkred} in a uniform way}
   \end{list2big}
 \end{list0}
+
+\newcommand{\archSlide}[1]{
+\slide{Virtual Observatory Architecture Diagram v2.1}
+
+\begin{center}
+  \includegraphics[height=15cm]{#1}
+
+  \burl{https://www.ivoa.net/documents/IVOAArchitecture/}
+\end{center}
+}
+\archSlide{archdiag0.png}
+\archSlide{archdiag1.png}
+\addtocounter{page}{-1}
+\archSlide{archdiag2.png}
+\addtocounter{page}{-1}
+
 
 
 \label{lastPage}
@@ -141,10 +175,6 @@
 \bigword{\ \ AOB?}
 }
 \aobSlide{}
-\aobSlide{
-  \put(0,-21){\includegraphics[scale=0.85]{cylon2.png}}
-  \put(26,-21){\includegraphics[scale=0.95]{cylon1.png}}
-}
 
 
 \fi
