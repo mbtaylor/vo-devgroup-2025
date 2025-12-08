@@ -159,6 +159,68 @@ And why should I care?
 \archSlide{archdiag2.png}
 \addtocounter{page}{-1}
 
+\slide{Virtual Observatory Protocols}
+
+\begin{picture}(26,0)
+  \put(25,-8){\includegraphics[height=8cm]{archdiag2.png}}
+  \put(26,-17){{\color{darkred}$^{\ast}$ YMMV}}
+\end{picture}
+\vspace*{-1.5cm}
+
+\begin{list0}
+\vspace*{-0.2cm}
+  \item Most important{\color{darkred}$^{\ast}$} user-facing VO standards:
+  \begin{list2}
+\vspace*{-0.2cm}
+    \item Directory service:
+    \begin{list3}
+      \item {\bf Registry} --- Locate data archives/services
+    \end{list3}
+\vspace*{-0.2cm}
+    \item Positional data access services (by RA/Dec + radius):
+    \begin{list3}
+      \item {\bf Cone Search} --- Rows from catalogue
+      \item {\bf Simple Image Access (SIA)} --- Images from archive
+      \item {\bf Simple Spectral Access (SSA)} --- Spectra from archive
+      \item {\bf Hierarchical Progressive Survey (HiPS)} --- All-sky imagery
+    \end{list3}
+\vspace*{-0.2cm}
+    \item General data access service:
+    \begin{list3}
+      \item {\bf Table Access Protocol/Astro Data Query Language (TAP/ADQL)}
+            --- SQL-like query of database
+      \item {\bf ObsCore}
+    \end{list3}
+\vspace*{-0.2cm}
+    \item Application communications:
+    \begin{list3}
+      \item {\bf Simple Application Messaging Protocol (SAMP)} ---
+            exchange data/control between local applications
+    \end{list3}
+\vspace*{-0.2cm}
+    \item File format:
+    \begin{list3}
+      \item {\bf VOTable} -- exhanges table data with rich metadata
+      \item {\bf Multi-Order Coverage map (MOC)}
+            --- compact description of sky coverage
+    \end{list3}
+\vspace*{-0.2cm}
+    \item Semantics:
+    \begin{list3}
+      \item {\bf Uniform Content Descriptor (UCD)}
+            --- describes columns in a table
+      \item {\bf VOUnits} -- standard units notation
+    \end{list3}
+  \end{list2}
+% \item {\color{grey}Not quite the VO}
+% \begin{list2}
+%   \item[{\color{grey}$\bullet$}] {\color{grey}VizieR}
+%   \item[{\color{grey}$\bullet$}] {\color{grey}CDS Xmatch service}
+% \end{list2}
+\end{list0}
+
+
+
 
 
 \label{lastPage}
