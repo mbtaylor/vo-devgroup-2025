@@ -228,11 +228,96 @@ And why should I care?
 
 \slide{Registry}
 
+\begin{picture}(30,0)
+  \put(22,-17){\includegraphics[height=18cm]{registry.png}}
+\end{picture}
+\vspace*{-1.5cm}
+
+\begin{list0}
+  \item Database of all VO Services \\
+        (also documents, organisations, data collections...)
+  \begin{list2}
+    \item It's not actually centralised, but you can think of it as if it was
+    \item Tools offering you services will query the Registry to find \\
+          where they live and what's in them
+    \item You can also query it directly using TAP (RegTAP)\\[2ex]
+          {\footnotesize\color{brown}\begin{verbatim}
+   SELECT ivoid, short_name, res_title, access_url
+   FROM rr.resource
+   NATURAL JOIN rr.capability
+   NATURAL JOIN rr.interface
+   WHERE standard_id = 'ivo://ivoa.net/std/conesearch'
+     AND (short_name ILIKE '%sdss%' OR 1=ivo_hasword(res_title, 'sdss'))
+     AND (short_name ILIKE '%dr16%' OR 1=ivo_hasword(res_title, 'dr16'))
+          \end{verbatim}}
+  \end{list2}
+\end{list0}
+
 \slide{VOTable}
 
 \slide{Simple positional queries}
 
+\begin{picture}(30,0)
+  \put(0,-17){\includegraphics[height=8cm]{m31-cone.pdf}}
+  \put(9,-17){\includegraphics[height=8cm]{cone-table.png}}
+  \put(24,-17){\includegraphics[height=16cm]{cone-window.png}}
+\end{picture}
+\vspace*{-1.5cm}
+
+\begin{list0}
+  \item \textbf{Cone} Search,
+        \textbf{S}imple \textbf{I}mage \textbf{A}ccess,
+        \textbf{S}imple \textbf{S}pectral \textbf{A}ccess
+  \begin{list2}
+    \item Give the service a sky position (RA, Dec) and some kind of radius \\
+          (details differ a bit between Cone, SIA, SSA)
+    \item The service gives you back a (VO)Table with a row for each result
+    \begin{description}
+      \item[Cone:] list of catalogue entries (e.g.\ sources) near that position
+      \item[SIA:]  list of images near that position
+                   (one column has a URL for the image file)
+      \item[SSA:]  list of spectra near that position
+                   (one column has a URL for the spectrum file)
+    \end{description}
+  \end{list2}
+\end{list0}
+
 \slide{HiPS}
+
+\begin{picture}(30,0)
+  \put(22,-17){\includegraphics[width=15cm]{aladin-lite.png}}
+\end{picture}
+\vspace*{-1.5cm}
+
+\begin{list0}
+  \item All-sky hierarchical imagery
+        (\textbf{Hi}erarchical \textbf{P}rogressive \textbf{S}urvey)
+  \begin{list2big}
+    \item Like Google Earth, but looking up (usually)
+    \item Based on HEALPix tiling (doesn't blow up at the poles)
+    \item HiPS datasets exist for
+          lots of sky surveys image archives
+    \begin{list3}
+      \item Also quite a few non-sky image sets too (Mars, the Moon, ...)
+    \end{list3}
+    \item Usually access it using a dedicated all-sky viewer, \\
+          mostly Aladin variants:
+    \begin{list3}
+      \item \bhref{https://aladin.cds.unistra.fr/}{Aladin}:
+            desktop java tool
+      \item \bhref{https://aladin.cds.unistra.fr/AladinLite/doc/}{Aladin Lite}:
+            web-based (super easy to embed in your own web pages)
+      \item \bhref{https://github.com/cds-astro/ipyaladin}{ipyaladin}:
+            stick it in a Jupyter notebook
+      \item \bhref{https://sky.esa.int/}{ESASky}:
+            AladinLite-based interface to ESA-curated sky survey data
+    \end{list3}
+    \item You can also do cutouts: 
+          \bhref{https://alasky.cds.unistra.fr/hips-image-services/hips2fits}
+                {HiPS2FITS}
+    \item HiPS exist for some spectral cube datasets too
+  \end{list2big}
+\end{list0}
 
 \slide{TAP/ADQL}
 
