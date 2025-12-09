@@ -129,32 +129,56 @@ And why should I care?
 \end{center}
 
 \newpage
-\vspace*{1cm}
+\vspace*{0.4cm}
 \begin{center}
 {\Large\bf\color{darkred}
  ``All astronomy archives in your computer''}
 \end{center}
 
 \begin{list0}
-% \item {\color{darkred}\sl ``All astro archives in your computer''}
   \item What the VO is NOT:
   \begin{list2big}
     \item A massive computer holding all archived datasets
   \end{list2big}
   \item What the VO is:
   \begin{list2big}
-    \item A set of {\color{darkred} interoperable protocols}
+    \item A set of {\color{darkred} interoperable standards}
           that clients and services can use to talk to each other
           {\color{darkred} in a uniform way}
+    \begin{list3}
+      \item Standards are developed and maintained by the IVOA
+            (\bhref{https://www.ivoa.net/}
+                   {International Virtual Observatory Alliance}) \\
+            --- in business since $\sim$2002
+    \end{list3}
+    \item and software that uses those standards:
+    \begin{list3}
+      \item clients like PyVO, TOPCAT, STILTS, Aladin(-Lite), SPLAT, CASSIS, ...
+      \item lots of data services
+    \end{list3}
+  \end{list2big}
+  \item You're probably already using it
+  \begin{list2big}
+    \item VO publication is quite mainstream for large data providers now
+    \begin{list3}
+      \item e.g.\ if you're using Gaia data,
+                  it's probably come from a VO service
+    \end{list3}
+    \item You don't have to know all about the VO, but:
+    \begin{list3}
+      \item some background may help you to understand what tools are doing
+      \item there may be some useful functionality out there
+            you don't know about
+    \end{list3}
   \end{list2big}
 \end{list0}
 
-\begin{list0}
-  \item What the VO also is not:
-  \begin{list2big}
-     \item Astroquery
-  \end{list2big}
-\end{list0}
+% \begin{list0}
+%   \item What the VO also is not:
+%   \begin{list2big}
+%      \item Astroquery
+%   \end{list2big}
+% \end{list0}
 
 \newcommand{\archSlide}[1]{
 \slide{Virtual Observatory Architecture Diagram v2.1}
@@ -511,7 +535,39 @@ And why should I care?
   \end{list2}
 \end{list0}
 
-\slide{ObsCore}
+% \slide{ObsCore}
+
+\slide{And there's more!}
+
+\begin{list0}
+  \item Some other VO standards:
+  \begin{list2}
+    \item DataLink
+    \item DALI
+    \item SLAP
+    \item VOEvent
+    \item SODA
+    \item ObjObsSAP
+    \item EPN-TAP
+    \item LineTAP
+%   \item STC
+%   \item VODML
+%   \item MIVOT
+%   \item UWS
+%   \item SSO
+%   \item GMS
+%   \item VOSI
+%   \item[] ...
+    \item[] ...
+  \end{list2}
+  \item Plus non-standard but very useful VO-friendly services:
+  \begin{list2}
+    \item VizieR
+    \item CDS X-Match
+    \item SIMBAD
+    \item[] ...
+  \end{list2}
+\end{list0}
 
 
 
