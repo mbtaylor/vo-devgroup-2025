@@ -255,6 +255,59 @@ And why should I care?
 
 \slide{VOTable}
 
+\begin{SaveVerbatim}{votable}
+<?xml version='1.0'?>
+<VOTABLE version="1.4" xmlns="http://www.ivoa.net/xml/VOTable/v1.3">
+  <RESOURCE>
+    <TABLE name="dr3lite" nrows="10">
+      <DESCRIPTION>This data is from Gaia DR3</DESCRIPTION>
+      <FIELD ID="source_id" datatype="long" name="source_id" ucd="meta.id;meta.main">
+        <DESCRIPTION>Gaia DR3 unique source identifier.</DESCRIPTION>
+      </FIELD>
+      <FIELD ID="ra" datatype="float" name="ra" ucd="pos.eq.ra;meta.main" unit="deg">
+        <DESCRIPTION>Barycentric Right Ascension in ICRS at epoch J2016.0</DESCRIPTION>
+      </FIELD>
+      <FIELD ID="dec" datatype="float" name="dec" ucd="pos.eq.dec;meta.main" unit="deg">
+        <DESCRIPTION>Barycentric Declination in ICRS at epoch J2016.0</DESCRIPTION>
+      </FIELD>
+      <FIELD ID="parallax" datatype="float" name="parallax" ucd="pos.parallax" unit="mas">
+        <DESCRIPTION>Absolute barycentric stellar parallax of the source at J2016.0.</DESCRIPTION>
+      </FIELD>
+      <DATA>
+        <TABLEDATA>
+          <TR><TD>4267180339403392768</TD> <TD>286.71692</TD> <TD>0.2761946</TD>  <TD>1.0849239</TD></TR>
+          <TR><TD>5252403815119316480</TD> <TD>152.62506</TD> <TD>-64.2677</TD>   <TD>0.8543564</TD></TR>
+          <TR><TD>1937745177867542656</TD> <TD>348.43497</TD> <TD>43.940704</TD>  <TD>1.0420077</TD></TR>
+          <TR><TD>5971301282285218048</TD> <TD>252.72972</TD> <TD>-37.917213</TD> <TD>0.58765984</TD></TR>
+          <TR><TD>5953201637243132416</TD> <TD>260.6788</TD>  <TD>-44.788773</TD> <TD>-0.2933756</TD></TR>
+          <TR><TD>6013771224556727040</TD> <TD>231.36102</TD> <TD>-35.700317</TD> <TD/></TR>
+          <TR><TD>6125916630291830144</TD> <TD>186.18074</TD> <TD>-50.75659</TD>  <TD>0.43694037</TD></TR>
+          <TR><TD>6018228919573319936</TD> <TD>245.57784</TD> <TD>-39.0594</TD>   <TD>2.3795636</TD></TR>
+          <TR><TD>5203483274312495872</TD> <TD>144.84912</TD> <TD>-77.016785</TD> <TD>0.35218337</TD></TR>
+          <TR><TD>4162615512253865856</TD> <TD>263.4329</TD>  <TD>-12.341759</TD> <TD>-0.2832363</TD></TR>
+        </TABLEDATA>
+      </DATA>
+    </TABLE>
+  </RESOURCE>
+</VOTABLE>
+\end{SaveVerbatim}
+
+\begin{picture}(30,0)
+  \put(17,-16){{\color{brown}\tiny\scalebox{0.8}{\BUseVerbatim{votable}}}}
+\end{picture}
+\vspace*{-1.5cm}
+
+\begin{list0}
+  \item VOTable is a transport format for tabular data in the VO
+  \begin{list2}
+    \item Used for moving lots of data around in the VO
+    \item XML-based
+    \item Suitable for streaming
+    \item Can carry VO/astronomy-related metadata
+    \item Mostly {\bf you don't need to understand the details}
+  \end{list2}
+\end{list0}
+
 \slide{Simple positional queries}
 
 \begin{picture}(30,0)
