@@ -82,10 +82,10 @@
 \setcounter{page}{1}
 
 \begin{picture}(30,0)
-  \put(25,-13){\includegraphics[width=12cm]{ivoa_logoc.jpg}}
+  \put(25,-15){\includegraphics[width=12cm]{ivoa_logoc.jpg}}
 \end{picture}
 
-\vspace*{-0.5cm}
+\vspace*{1.5cm}
 \begin{center}
 {\color{darkblue}
 \framebox{\Huge\bf
@@ -120,7 +120,7 @@
 \vspace*{6cm}
 \begin{center}
 \begin{minipage}{0cm}
-\Huge
+\Huge\color{teal}
 \begin{tabbing}
 What is the Virtual Observatory? \\[2ex]
 And why should I care?
@@ -129,9 +129,14 @@ And why should I care?
 \end{center}
 
 \newpage
+\vspace*{1cm}
+\begin{center}
+{\Large\bf\color{darkred}
+ ``All astronomy archives in your computer''}
+\end{center}
 
 \begin{list0}
-  \item {\color{darkred}\sl ``All astro archives in your computer''}
+% \item {\color{darkred}\sl ``All astro archives in your computer''}
   \item What the VO is NOT:
   \begin{list2big}
     \item A massive computer holding all archived datasets
@@ -374,13 +379,139 @@ And why should I care?
 
 \slide{TAP/ADQL}
 
-\slide{ObsCore}
+\begin{picture}(30,0)
+  \put(20,-16){\includegraphics[height=16cm]{TapTableLoadDialog_query.png}}
+  \put(20,-17){{\footnotesize\sl See also my dev group talk from 3 May 2024:
+                \bhref{https://github.com/astro-group-bristol/developer-group/files/15199523/sql.pdf}
+                      {SQL (and ADQL and TAP)}}}
+\end{picture}
+\vspace*{-1.5cm}
+
+\begin{list0}
+  \item TAP: Table Access Protocol
+  \begin{list2}
+    \item Execute an SQL-like query on a remote database
+    \item Provide information to the user (to understand how to query)
+    \begin{list3}
+      \item Table metadata, ADQL extra functions, example queries, ...
+    \end{list3}
+  \end{list2}
+  \item ADQL: Astronomical Data Query Language
+  \begin{list2}
+    \item SQL-like language you write queries in
+    \item Mostly just a standardised dialect of SQL, \\
+          a few astro-specific features (spherical geometry)
+  \end{list2}
+  \item Not so simple but very powerful
+  \begin{list2}
+    \item You can do very flexible and powerful things
+    \item Simple queries, selections, crossmatches, combine multiple tables, \\
+          local uploads, selections, histogram/sky map calculations, ...
+  \end{list2}
+  \item Clients
+  \begin{list2}
+    \item I recommend TOPCAT!
+    \item Also
+          \bhref{https://pyvo.readthedocs.io/en/latest/dal/index.html\#pyvo-tap}
+                {PyVO},
+          service-specific web pages etc
+  \end{list2}
+\end{list0}
 
 \slide{SAMP}
 
+\begin{picture}(30,0)
+  \put(18,-17){\includegraphics[height=7cm]{linked-ir.png}}
+\end{picture}
+\vspace*{-1.5cm}
+
+\begin{list0}
+  \item Simple Application Messaging Protocol
+  \begin{list2big}
+    \item Lets astro applications talk to each other
+    \item Participating clients:
+    \begin{list3}
+      \item TOPCAT, Aladin, Astropy, ds9, Aladin-Lite, CASSIS, SPLAT, \\
+            various archive web pages, your python script or web page, ...
+    \end{list3}
+    \item Protocol design: \includegraphics[height=3ex]{hub.png}
+    \begin{list3}
+      \item Publish/subscribe message passing,
+            Remote Procedure Calls using XML-RPC
+      \item SAMP ``Hub'' sits on the desktop and mediates communications
+      \item When it works well it's quite neat \Smiley
+      \item Sometimes it doesn't work
+            (network setup, OS issues, IPC funnies, ...) \Frowny
+    \end{list3}
+    \item Types of messages sent (MTypes):
+    \begin{list3}
+      \item Mostly quite generic
+      \item e.g.: ``load this table'', ``point at this sky position'', \\
+                  ``highlight row \#N of the table I sent you''
+    \end{list3}
+  \end{list2big}
+\end{list0}
+
 \slide{MOC}
 
+\begin{picture}(30,0)
+  \put(18,-7){\includegraphics[height=5.2cm]{HEALPix.png}}
+  \put(17,-17){\includegraphics[height=10cm]{moc.png}}
+\end{picture}
+\vspace*{-1.5cm}
+
+\begin{list0}
+  \item Multi-Order Coverage maps
+  \begin{list2big}
+    \item Format for describing sky coverage
+    \item Based on HEALPix tiling
+    \item Serialize as FITS or ASCII
+    \item Memory-efficient: use low-order (big) pixels \\
+          where possible, high-order (small) pixels for detail
+    \item Very fast calculations (search, intersection, union)
+    \item Various libraries,
+          e.g.\ \bhref{https://cds-astro.github.io/mocpy/}{MOCPy}
+  \end{list2big}
+\end{list0}
+
 \slide{UCD/VOUnits}
+
+\begin{list0}
+  \item Column metadata so that you and your computers can understand tables
+  \begin{list2}
+    \item Not really necessary for the 3-column CSV file you just wrote
+    \item Quite useful for a 1000-column monster from an archive you
+          never heard of
+  \end{list2}
+  \item[] \textbf{UCD:} Uniform Content Descriptors
+  \begin{list2}
+    \item Machine-readable semantic tags for columns
+    \item Hierarchical, can be stuck together with semicolons
+    \begin{list3}
+      \item \texttt{pos.eq.ra}, \texttt{pos.eq.dec},
+            \texttt{meta.id;meta.main},
+            \texttt{em.opt.V},
+            \texttt{obs.atmos.turbulence.isoplanatic}, ...
+    \end{list3}
+    \item There's a big list at
+          \bhref{https://www.ivoa.net/documents/UCD1+/}{EN-UCDlist-1.6}
+  \end{list2}
+  \item[] \textbf{VOUnits:} Units for the VO
+  \begin{list2}
+    \item Just a standard way to encode units understood by VO tools
+    \begin{list3}
+      \item \texttt{m/s**2}, \texttt{m.s**-2}, \texttt{mJy}, \texttt{log(GHz)},
+            ...
+    \end{list3}
+    \item Mostly sensible but a few surprises:
+          no whitespace, ``.'' required for multiplication,
+          ``\texttt{**}'' for powers
+    \item Specification at
+          \bhref{https://www.ivoa.net/documents/VOUnits/}{REC-VOUnits-1.1}
+  \end{list2}
+\end{list0}
+
+\slide{ObsCore}
 
 
 
