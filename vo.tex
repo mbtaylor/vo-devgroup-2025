@@ -153,8 +153,9 @@ And why should I care?
     \end{list3}
     \item and software that uses those standards:
     \begin{list3}
-      \item clients like PyVO, TOPCAT, STILTS, Aladin(-Lite), SPLAT, CASSIS, ...
       \item lots of data services
+      \item clients like PyVO, TOPCAT, STILTS, Aladin(-Lite), SPLAT, CASSIS,
+            scripts, web pages, ...
     \end{list3}
   \end{list2big}
   \item You're probably already using it
@@ -181,7 +182,7 @@ And why should I care?
 % \end{list0}
 
 \newcommand{\archSlide}[1]{
-\slide{Virtual Observatory Architecture Diagram v2.1}
+\slide{IVOA Architecture Diagram v2.1}
 
 \begin{center}
   \includegraphics[height=15cm]{#1}
@@ -279,6 +280,7 @@ And why should I care?
      AND (short_name ILIKE '%sdss%' OR 1=ivo_hasword(res_title, 'sdss'))
      AND (short_name ILIKE '%dr16%' OR 1=ivo_hasword(res_title, 'dr16'))
           \end{verbatim}}
+    \item Or browse it using \bhref{https://dc.g-vo.org/wirr/q/ui/}{WIRR}
   \end{list2}
 \end{list0}
 
@@ -290,16 +292,16 @@ And why should I care?
   <RESOURCE>
     <TABLE name="dr3lite" nrows="10">
       <DESCRIPTION>This data is from Gaia DR3</DESCRIPTION>
-      <FIELD ID="source_id" datatype="long" name="source_id" ucd="meta.id;meta.main">
+      <FIELD name="source_id" datatype="long" ucd="meta.id;meta.main">
         <DESCRIPTION>Gaia DR3 unique source identifier.</DESCRIPTION>
       </FIELD>
-      <FIELD ID="ra" datatype="float" name="ra" ucd="pos.eq.ra;meta.main" unit="deg">
+      <FIELD name="ra" datatype="float" ucd="pos.eq.ra;meta.main" unit="deg">
         <DESCRIPTION>Barycentric Right Ascension in ICRS at epoch J2016.0</DESCRIPTION>
       </FIELD>
-      <FIELD ID="dec" datatype="float" name="dec" ucd="pos.eq.dec;meta.main" unit="deg">
+      <FIELD name="dec" datatype="float" ucd="pos.eq.dec;meta.main" unit="deg">
         <DESCRIPTION>Barycentric Declination in ICRS at epoch J2016.0</DESCRIPTION>
       </FIELD>
-      <FIELD ID="parallax" datatype="float" name="parallax" ucd="pos.parallax" unit="mas">
+      <FIELD name="parallax" datatype="float" ucd="pos.parallax" unit="mas">
         <DESCRIPTION>Absolute barycentric stellar parallax of the source at J2016.0.</DESCRIPTION>
       </FIELD>
       <DATA>
@@ -333,6 +335,7 @@ And why should I care?
     \item XML-based
     \item Suitable for streaming
     \item Can carry VO/astronomy-related metadata
+    \item Can be read by Astropy, TOPCAT etc
     \item Mostly {\bf you don't need to understand the details}
   \end{list2}
 \end{list0}
@@ -362,43 +365,6 @@ And why should I care?
                    (one column has a URL for the spectrum file)
     \end{description}
   \end{list2}
-\end{list0}
-
-\slide{HiPS}
-
-\begin{picture}(30,0)
-  \put(22,-17){\includegraphics[width=15cm]{aladin-lite.png}}
-\end{picture}
-\vspace*{-1.5cm}
-
-\begin{list0}
-  \item All-sky hierarchical imagery
-        (\textbf{Hi}erarchical \textbf{P}rogressive \textbf{S}urvey)
-  \begin{list2big}
-    \item Like Google Earth, but looking up (usually)
-    \item Based on HEALPix tiling (doesn't blow up at the poles)
-    \item HiPS datasets exist for
-          lots of sky surveys image archives
-    \begin{list3}
-      \item Also quite a few non-sky image sets too (Mars, the Moon, ...)
-    \end{list3}
-    \item Usually access it using a dedicated all-sky viewer, \\
-          mostly Aladin variants:
-    \begin{list3}
-      \item \bhref{https://aladin.cds.unistra.fr/}{Aladin}:
-            desktop java tool
-      \item \bhref{https://aladin.cds.unistra.fr/AladinLite/doc/}{Aladin Lite}:
-            web-based (super easy to embed in your own web pages)
-      \item \bhref{https://github.com/cds-astro/ipyaladin}{ipyaladin}:
-            stick it in a Jupyter notebook
-      \item \bhref{https://sky.esa.int/}{ESASky}:
-            AladinLite-based interface to ESA-curated sky survey data
-    \end{list3}
-    \item You can also do cutouts: 
-          \bhref{https://alasky.cds.unistra.fr/hips-image-services/hips2fits}
-                {HiPS2FITS}
-    \item HiPS exist for some spectral cube datasets too
-  \end{list2big}
 \end{list0}
 
 \slide{TAP/ADQL}
@@ -442,6 +408,44 @@ And why should I care?
   \end{list2}
 \end{list0}
 
+\slide{HiPS}
+
+\begin{picture}(30,0)
+  \put(22,-17){\includegraphics[width=15cm]{aladin-lite.png}}
+  \put(8,-17.5){\includegraphics[height=4cm]{HEALPix.png}}
+\end{picture}
+\vspace*{-1.5cm}
+
+\begin{list0}
+  \item All-sky hierarchical imagery
+        (\textbf{Hi}erarchical \textbf{P}rogressive \textbf{S}urvey)
+  \begin{list2big}
+    \item Like Google Earth, but looking up (usually)
+    \item Based on HEALPix tiling (doesn't blow up at the poles)
+    \item HiPS datasets exist for
+          lots of sky surveys image archives
+    \begin{list3}
+      \item Also quite a few non-sky image sets too (Mars, the Moon, ...)
+    \end{list3}
+    \item Usually access it using a dedicated all-sky viewer, \\
+          mostly Aladin variants:
+    \begin{list3}
+      \item \bhref{https://aladin.cds.unistra.fr/}{Aladin}:
+            desktop java tool
+      \item \bhref{https://aladin.cds.unistra.fr/AladinLite/doc/}{Aladin Lite}:
+            web-based (super easy to embed in your own web pages)
+      \item \bhref{https://github.com/cds-astro/ipyaladin}{ipyaladin}:
+            stick it in a Jupyter notebook
+      \item \bhref{https://sky.esa.int/}{ESASky}:
+            AladinLite-based interface to ESA-curated sky survey data
+    \end{list3}
+    \item You can also do cutouts: 
+          \bhref{https://alasky.cds.unistra.fr/hips-image-services/hips2fits}
+                {HiPS2FITS}
+    \item HiPS exist for some spectral cube datasets too
+  \end{list2big}
+\end{list0}
+
 \slide{SAMP}
 
 \begin{picture}(30,0)
@@ -480,7 +484,8 @@ And why should I care?
 
 \begin{picture}(30,0)
   \put(18,-7){\includegraphics[height=5.2cm]{HEALPix.png}}
-  \put(17,-17){\includegraphics[height=10cm]{moc.png}}
+  \put(16,-17){\includegraphics[height=10cm]{moc.png}}
+  \put(1,-17){\includegraphics[height=8cm]{ngcs.pdf}}
 \end{picture}
 \vspace*{-1.5cm}
 
@@ -564,13 +569,18 @@ And why should I care?
   \begin{list2}
     \item VizieR
     \item CDS X-Match
+    \item VOSA
     \item SIMBAD
     \item[] ...
   \end{list2}
 \end{list0}
 
 
+\newpage
 
+\begin{center}
+  \includegraphics[width=35cm]{ivoa_logoc.jpg}
+\end{center}
 
 \label{lastPage}
    
