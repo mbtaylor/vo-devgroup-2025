@@ -12,10 +12,10 @@ view: vo.view
 vo.pdf: $(VCS_STAMP)
 
 $(VCS_STAMP):
-	echo -n '{\\tt ' >$@
+	echo '{\\tt ' >$@
 	pwd | sed 's%.*/%%' >>$@
-	echo -n '{\\jobname}.tex ' >>$@
-	echo -n `git log -1 --pretty="format:%h %ci" | sed "s/ [+-].*//"`>>$@
+	echo '{\\jobname}.tex ' >>$@
+	echo `git log -1 --pretty="format:%h %ci" | sed "s/ [+-].*//"`>>$@
 	echo '}' >>$@
 
 clean:
