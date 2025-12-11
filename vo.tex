@@ -132,19 +132,22 @@ And why should I care?
 \end{center}
 
 \newpage
-\vspace*{0.4cm}
+\vspace*{-0.2cm}
 \begin{center}
 {\Large\bf\color{darkred}
  ``All astronomy archives in your computer''}
 \end{center}
+\vspace*{-0.4cm}
 
 \begin{list0}
   \item What the VO is NOT:
-  \begin{list2big}
+\vspace*{-0.2cm}
+  \begin{list2}
     \item A massive computer holding all archived datasets
-  \end{list2big}
+  \end{list2}
   \item What the VO is:
-  \begin{list2big}
+\vspace*{-0.2cm}
+  \begin{list2}
     \item A set of {\color{darkred} interoperable standards}
           that clients and services can use to talk to each other
           {\color{darkred} in a uniform way}
@@ -160,9 +163,15 @@ And why should I care?
       \item clients like PyVO, TOPCAT, STILTS, Aladin(-Lite), SPLAT, CASSIS,
             scripts, web pages, ...
     \end{list3}
-  \end{list2big}
+  \end{list2}
+  \item What the VO is also not:
+\vspace*{-0.2cm}
+  \begin{list2}
+    \item Astroquery
+  \end{list2}
   \item You're probably already using it
-  \begin{list2big}
+\vspace*{-0.2cm}
+  \begin{list2}
     \item VO publication is quite mainstream for large data providers now
     \begin{list3}
       \item e.g.\ if you're using Gaia data,
@@ -174,7 +183,7 @@ And why should I care?
       \item there may be some useful functionality out there
             you don't know about
     \end{list3}
-  \end{list2big}
+  \end{list2}
 \end{list0}
 
 % \begin{list0}
@@ -184,22 +193,25 @@ And why should I care?
 %   \end{list2big}
 % \end{list0}
 
-\newcommand{\archSlide}[1]{
+\newcommand{\archSlide}[2]{
 \slide{IVOA Architecture Diagram v2.1}
 
 \begin{center}
   \includegraphics[height=15cm]{#1}
+  
+  \vspace*{-.5cm}
+  {\bf IVOA Architecture Level #2}
 
   \burl{https://www.ivoa.net/documents/IVOAArchitecture/}
 \end{center}
 }
-\archSlide{archdiag0.png}
-\archSlide{archdiag1.png}
+\archSlide{archdiag0.png}{0}
+\archSlide{archdiag1.png}{1}
 \addtocounter{page}{-1}
-\archSlide{archdiag2.png}
+\archSlide{archdiag2.png}{2}
 \addtocounter{page}{-1}
 
-\slide{Virtual Observatory Protocols}
+\slide{Virtual Observatory Standards}
 
 \begin{picture}(26,0)
   \put(25,-7){\includegraphics[height=8cm]{archdiag2.png}}
@@ -259,34 +271,6 @@ And why should I care?
 % \end{list2}
 \end{list0}
 
-\slide{Registry}
-
-\begin{picture}(30,0)
-  \put(22,-17){\includegraphics[height=18cm]{registry.png}}
-\end{picture}
-\vspace*{-1.5cm}
-
-\begin{list0}
-  \item Database of all VO Services \\
-        (also documents, organisations, data collections...)
-  \begin{list2}
-    \item It's not actually centralised, but you can think of it as if it was
-    \item Tools offering you services will query the Registry to find \\
-          where they live and what's in them
-    \item You can also query it directly using TAP (RegTAP)\\[2ex]
-          {\footnotesize\color{brown}\begin{verbatim}
-   SELECT ivoid, short_name, res_title, access_url
-   FROM rr.resource
-   NATURAL JOIN rr.capability
-   NATURAL JOIN rr.interface
-   WHERE standard_id = 'ivo://ivoa.net/std/conesearch'
-     AND (short_name ILIKE '%sdss%' OR 1=ivo_hasword(res_title, 'sdss'))
-     AND (short_name ILIKE '%dr16%' OR 1=ivo_hasword(res_title, 'dr16'))
-          \end{verbatim}}
-    \item Or browse it using \bhref{https://dc.g-vo.org/wirr/q/ui/}{WIRR}
-  \end{list2}
-\end{list0}
-
 \slide{VOTable}
 
 \begin{SaveVerbatim}{votable}
@@ -340,6 +324,71 @@ And why should I care?
     \item Can carry VO/astronomy-related metadata
     \item Can be read by Astropy, TOPCAT etc
     \item Mostly {\bf you don't need to understand the details}
+  \end{list2}
+\end{list0}
+
+\slide{UCD/VOUnits}
+
+\begin{list0}
+  \item Column metadata so that you and your computers can understand tables
+  \begin{list2}
+    \item Not really necessary for the 3-column CSV file you just wrote
+    \item Quite useful for a 1000-column monster from an archive you
+          never heard of
+  \end{list2}
+  \item[] \textbf{UCD:} Uniform Content Descriptors
+  \begin{list2}
+    \item Machine-readable semantic tags for columns
+    \item Hierarchical, can be stuck together with semicolons
+    \begin{list3}
+      \item \texttt{pos.eq.ra}, \texttt{pos.eq.dec},
+            \texttt{meta.id;meta.main},
+            \texttt{em.opt.V},
+            \texttt{obs.atmos.turbulence.isoplanatic}, ...
+    \end{list3}
+    \item There's a big list at
+          \bhref{https://www.ivoa.net/documents/UCD1+/}{EN-UCDlist-1.6}
+  \end{list2}
+  \item[] \textbf{VOUnits:} Units for the VO
+  \begin{list2}
+    \item Just a standard way to encode units understood by VO tools
+    \begin{list3}
+      \item \texttt{m/s**2}, \texttt{m.s**-2}, \texttt{mJy}, \texttt{log(GHz)},
+            ...
+    \end{list3}
+    \item Mostly sensible but a few surprises:
+          no whitespace, ``.'' required for multiplication,
+          ``\texttt{**}'' for powers
+    \item Specification at
+          \bhref{https://www.ivoa.net/documents/VOUnits/}{REC-VOUnits-1.1}
+  \end{list2}
+\end{list0}
+
+\slide{Registry}
+
+\begin{picture}(30,0)
+  \put(22,-17){\includegraphics[height=18cm]{registry.png}}
+\end{picture}
+\vspace*{-1.5cm}
+
+\begin{list0}
+  \item Database of all VO Services \\
+        (also documents, organisations, data collections...)
+  \begin{list2}
+    \item It's not actually centralised, but you can think of it as if it was
+    \item Tools offering you services will query the Registry to find \\
+          where they live and what's in them
+    \item You can also query it directly using TAP (RegTAP)\\[2ex]
+          {\footnotesize\color{brown}\begin{verbatim}
+   SELECT ivoid, short_name, res_title, access_url
+   FROM rr.resource
+   NATURAL JOIN rr.capability
+   NATURAL JOIN rr.interface
+   WHERE standard_id = 'ivo://ivoa.net/std/conesearch'
+     AND (short_name ILIKE '%sdss%' OR 1=ivo_hasword(res_title, 'sdss'))
+     AND (short_name ILIKE '%dr16%' OR 1=ivo_hasword(res_title, 'dr16'))
+          \end{verbatim}}
+    \item Or browse it using \bhref{https://dc.g-vo.org/wirr/q/ui/}{WIRR}
   \end{list2}
 \end{list0}
 
@@ -449,6 +498,29 @@ And why should I care?
   \end{list2big}
 \end{list0}
 
+\slide{MOC}
+
+\begin{picture}(30,0)
+  \put(18,-7){\includegraphics[height=5.2cm]{HEALPix.png}}
+  \put(16,-17){\includegraphics[height=10cm]{moc.png}}
+  \put(1,-17){\includegraphics[height=8cm]{ngcs.pdf}}
+\end{picture}
+\vspace*{-1.5cm}
+
+\begin{list0}
+  \item Multi-Order Coverage maps
+  \begin{list2big}
+    \item Format for describing sky coverage
+    \item Based on HEALPix tiling
+    \item Serialize as FITS or ASCII
+    \item Memory-efficient: use low-order (big) pixels \\
+          where possible, high-order (small) pixels for detail
+    \item Very fast calculations (search, intersection, union)
+    \item Various libraries,
+          e.g.\ \bhref{https://cds-astro.github.io/mocpy/}{MOCPy}
+  \end{list2big}
+\end{list0}
+
 \slide{SAMP}
 
 \begin{picture}(30,0)
@@ -481,66 +553,6 @@ And why should I care?
                   ``highlight row \#N of the table I sent you''
     \end{list3}
   \end{list2big}
-\end{list0}
-
-\slide{MOC}
-
-\begin{picture}(30,0)
-  \put(18,-7){\includegraphics[height=5.2cm]{HEALPix.png}}
-  \put(16,-17){\includegraphics[height=10cm]{moc.png}}
-  \put(1,-17){\includegraphics[height=8cm]{ngcs.pdf}}
-\end{picture}
-\vspace*{-1.5cm}
-
-\begin{list0}
-  \item Multi-Order Coverage maps
-  \begin{list2big}
-    \item Format for describing sky coverage
-    \item Based on HEALPix tiling
-    \item Serialize as FITS or ASCII
-    \item Memory-efficient: use low-order (big) pixels \\
-          where possible, high-order (small) pixels for detail
-    \item Very fast calculations (search, intersection, union)
-    \item Various libraries,
-          e.g.\ \bhref{https://cds-astro.github.io/mocpy/}{MOCPy}
-  \end{list2big}
-\end{list0}
-
-\slide{UCD/VOUnits}
-
-\begin{list0}
-  \item Column metadata so that you and your computers can understand tables
-  \begin{list2}
-    \item Not really necessary for the 3-column CSV file you just wrote
-    \item Quite useful for a 1000-column monster from an archive you
-          never heard of
-  \end{list2}
-  \item[] \textbf{UCD:} Uniform Content Descriptors
-  \begin{list2}
-    \item Machine-readable semantic tags for columns
-    \item Hierarchical, can be stuck together with semicolons
-    \begin{list3}
-      \item \texttt{pos.eq.ra}, \texttt{pos.eq.dec},
-            \texttt{meta.id;meta.main},
-            \texttt{em.opt.V},
-            \texttt{obs.atmos.turbulence.isoplanatic}, ...
-    \end{list3}
-    \item There's a big list at
-          \bhref{https://www.ivoa.net/documents/UCD1+/}{EN-UCDlist-1.6}
-  \end{list2}
-  \item[] \textbf{VOUnits:} Units for the VO
-  \begin{list2}
-    \item Just a standard way to encode units understood by VO tools
-    \begin{list3}
-      \item \texttt{m/s**2}, \texttt{m.s**-2}, \texttt{mJy}, \texttt{log(GHz)},
-            ...
-    \end{list3}
-    \item Mostly sensible but a few surprises:
-          no whitespace, ``.'' required for multiplication,
-          ``\texttt{**}'' for powers
-    \item Specification at
-          \bhref{https://www.ivoa.net/documents/VOUnits/}{REC-VOUnits-1.1}
-  \end{list2}
 \end{list0}
 
 % \slide{ObsCore}
